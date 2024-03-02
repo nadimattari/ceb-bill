@@ -140,6 +140,11 @@ catch (Exception $e) { }
       </nav>
     </div>
   </div>
+  <div class="row mt-5">
+    <div class="col text-center">
+      <img class="img-fluid rounded mx-auto d-block" src="CEB-bill.png" alt="CEB Bill" />
+    </div>
+  </div>
   <div class="row my-5" x-data="data">
     <div class="col-4 bg-info p-2">
       <form>
