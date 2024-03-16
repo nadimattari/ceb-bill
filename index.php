@@ -145,9 +145,9 @@ catch (Exception $e) { }
       <img class="img-fluid rounded mx-auto d-block" src="CEB-bill.png" alt="CEB Bill" />
     </div>
   </div>
-  <div class="row my-5" x-data="data">
+  <div class="row my-5" x-data="formData()">
     <div class="col-4 bg-info p-2">
-      <form>
+      <form @submit.prevent="getTotal">
         <div data-mdb-input-init class="form-outline mb-4">
           <label class="form-label" for="tariff">Tariff</label>
           <select id="tariff" x-model="tariff" class="form-select" aria-label="Tariff">
@@ -160,7 +160,7 @@ catch (Exception $e) { }
           <label class="form-label" for="units">Units consumed</label>
           <input x-model="units" id="units" type="text" class="form-control" />
         </div>
-        <button x-on:click="getTotal" data-mdb-ripple-init type="button" class="btn btn-primary btn-block float-end">C A L C U L A T E</button>
+        <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block float-end">C A L C U L A T E</button>
       </form>
     </div>
     <div class="col-8">
@@ -196,7 +196,8 @@ catch (Exception $e) { }
 <script src="//cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="//cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js" defer></script>
 <script>
-    let data = {
+    function formData() {
+      return {
         tariff    : '110',
         units     : 0,
         response  : {
@@ -204,7 +205,7 @@ catch (Exception $e) { }
             total    : null,
             part_calc: [],
         },
-        getTotal  : () => {
+        getTotal () {
             fetch('<?php echo basename(__FILE__) ?>', {
                 method        : 'POST',
                 mode          : 'cors',
@@ -214,13 +215,14 @@ catch (Exception $e) { }
                 redirect      : 'follow',
                 referrerPolicy: "no-referrer",
                 body          : JSON.stringify({
-                    tariff: data.tariff,
-                    units : data.units,
+                    tariff: this.tariff,
+                    units : this.units,
                 }),
             })
             .then(res => res.json())
-            .then(res => data.response = res.data);
+            .then(res => this.response = res.data);
         },
+      }
     };
 </script>
 </body>
