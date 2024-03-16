@@ -69,10 +69,15 @@ function getTariffCEB($tariff = '110', $units = 0): array
         }
     }
 
+    // to pay
     $amounts['to_pay'] = $amounts['total'];
     if ($amounts['total'] < $min_tariff[$tariff]) {
         $amounts['to_pay'] = $min_tariff[$tariff];
     }
+
+    // 2 decimal places...
+    $amounts['total']  = number_format($amounts['total'], 2);
+    $amounts['to_pay'] = number_format($amounts['to_pay'], 2);
 
     return $amounts;
 }
@@ -166,29 +171,29 @@ catch (Exception $e) { }
     <div class="col-8">
       <table class="table">
         <thead>
-        <tr>
+        <tr class="text-end">
           <th>Part units consumed</th>
           <th>Rate (Rs)</th>
           <th>Total (Rs)</th>
         </tr>
         </thead>
         <tfoot>
-        <tr>
-          <th colspan="2" class="text-end">TOTAL</th>
+        <tr class="text-end">
+          <th colspan="2">TOTAL</th>
           <th x-html="response.total"></th>
         </tr>
         </tfoot>
         <tbody>
           <template x-for="item in response.part_calc">
-            <tr>
+            <tr class="text-end">
               <td x-text="item.units"></td>
-              <td x-text="item.rate" class="text-end"></td>
-              <td x-text="item.amount" class="text-end"></td>
+              <td x-text="item.rate"></td>
+              <td x-text="item.amount"></td>
             </tr>
           </template>
         </tbody>
       </table>
-      <p class="text-center fs-1 mt-3 fw-bolder font-monospace" x-show="response.to_pay > 0" x-html="'TO PAY: ' + response.to_pay"></p>
+      <p class="text-center fs-1 mt-3 fw-bolder font-monospace" x-show="response.to_pay != null" x-html="'TO PAY: ' + response.to_pay"></p>
     </div>
   </div>
   <footer class="text-center p-3 mb-2 bg-light text-muted"><span class="copyleft">&copy;</span> Nadim Attari | Use at your own riks</footer>
