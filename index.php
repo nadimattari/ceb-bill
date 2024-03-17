@@ -197,7 +197,7 @@ catch (Exception $e) { }
           </template>
         </tbody>
       </table>
-      <p class="text-center fs-1 mt-3 fw-bolder font-monospace" x-show="response.to_pay != null" x-html="'TO PAY: ' + response.to_pay"></p>
+      <p class="text-center fs-1 mt-3 fw-bolder font-monospace" x-show="response.to_pay != null" x-html="'CONSUMPTION CHARGES: ' + response.to_pay"></p>
     </div>
   </div>
   <footer class="text-center p-3 mb-2 bg-light text-muted"><span class="copyleft">&copy;</span> Nadim Attari | Use at your own riks</footer>
