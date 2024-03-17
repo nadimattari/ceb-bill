@@ -137,7 +137,11 @@ catch (Exception $e) { }
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" target="_blank" href="//github.com/nadimattari/">Github</a>
+                <a class="nav-link" aria-current="page" target="_blank" href="//github.com/nadimattari/">Github (Nadim Attari)</a>
+              </li>
+              <li class="nav-item"><a class="nav-link">|</a></li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" target="_blank" href="//github.com/MrSunshyne">Frontend/AlpineJS help from Sandeep</a>
               </li>
             </ul>
           </div>
