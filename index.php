@@ -52,6 +52,7 @@ function getTariffCEB($tariff = '110', $units = 0): array
                 'rate'   => $part_rate['rate'],
                 'amount' => number_format($sub_total, 2),
             ];
+            $units = 0;
         }
         else {
             $units     -= $part_rate['units'];
@@ -64,7 +65,7 @@ function getTariffCEB($tariff = '110', $units = 0): array
         }
 
         $amounts['total'] += $sub_total;
-        if ($units <= $part_rate['units']) {
+        if ($units === 0) {
             break;
         }
     }
